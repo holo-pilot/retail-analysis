@@ -3,9 +3,6 @@ import pandas as pd
 # Read CSV file
 df = pd.read_csv('online-retail.csv')
 
-# Print first 10 rows
-
-
 
 # Print data information
 
