@@ -18,17 +18,6 @@ mean = math.floor(true_mean)  # Mean is rounded down as quantity cannont be half
 
 mode = df['Quantity'].mode() # This shows that the most common amount of items bought per product is one.
 
-true_minimum = df['Quantity'].min()    # Minimum and maximum are opposites of each other suggesting that these transactions are refunds. 
-true_maximum = df['Quantity'].max()
-
-true_id_minimum = df['Quantity'].idxmin()
-true_id_maximum = df['Quantity'].idxmax()
-
-
-print('The ID' , true_id_minimum)
-print('contain the minimum which is' , true_minimum)
-print('The ID' , true_id_maximum)
-print('contain the maximum which is' , true_maximum)
 
 ## Print tests
 

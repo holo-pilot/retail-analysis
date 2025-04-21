@@ -1,50 +1,38 @@
 import pandas as pd
 import math
-
-# Read CSV file
-df = pd.read_csv('online-retail.csv')
-
-# Finding minimum and maximum values
-
-minimum = df['Quantity'].min()    # Minimum and maximum are opposites of each other suggesting that these transactions are refunds. 
-maximum = df['Quantity'].max()    # To find the true minimum and maximum we must find the smallest positive integer and the maximum should not have a negative quivalent.
+import numpy as np
 
 
-id_minimum = df['Quantity'].idxmin()
-id_maximum = df['Quantity'].idxmax()
+
+
+# opening cleaning.py and reading it with read() and executing if with exec()
+with open("cleaning/cleaning.py") as file:
+    exec(file.read())
+
+
+
+df1 = df[["StockCode","Description","Quantity"]]
+df1 = df1.drop(df1[df1['Quantity'] < 0].index)     # Values with negative quantities are dropped as it is assumed that they are negative due to inventory error.
+df1 = df1.groupby('StockCode').sum()
+
+
+print(df1.info())
+
+minimum = df1['Quantity'].min()    # Minimum and maximum are opposites of each other suggesting that these transactions are refunds. 
+maximum = df1['Quantity'].max()    # To find the true minimum and maximum we must find the smallest positive integer and the maximum should not have a negative quivalent.
+
+
+id_minimum = df1['Quantity'].idxmin()
+id_maximum = df1['Quantity'].idxmax()
 
 # Find information of refunded rows
 
-print(df.loc[[id_minimum]])   # After analysing these results we can see that the transaction is a refund 
-print(df.loc[[id_maximum]])
-
-# Removing refunded rows
-
-a = id_minimum
-b = id_maximum
-
-df = df.drop([a,b])
-
-# Drop check
-
-
-true_minimum = df['Quantity'].min()    # Minimum and maximum are opposites of each other suggesting that these transactions are refunds. 
-true_maximum = df['Quantity'].max()
-
-true_id_minimum = df['Quantity'].idxmin()
-true_id_maximum = df['Quantity'].idxmax()
-
-
-print('The ID' , true_id_minimum)
-print('contain the minimum which is' , true_minimum)
-print('The ID' , true_id_maximum)
-print('contain the maximum which is' , true_maximum)
+print(df1.loc[[id_minimum]])   
+print(df1.loc[[id_maximum]])
 
 
 
-## Print tests
 
-# print('The ID' , id_minimum)
-# print('contain the minimum which is' , minimum)
-# print('The ID' , id_maximum)
-# print('contain the maximum which is' , maximum)
+
+
+## Note iloc is for the actual row in the table loc is the one you can see ##
