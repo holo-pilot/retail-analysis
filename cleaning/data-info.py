@@ -17,4 +17,3 @@ print(empty_columns)
 
 duplicates = df[df.duplicated(['InvoiceNo', 'StockCode','CustomerID','Description','InvoiceDate'], keep=False)]
 print(duplicates)
-

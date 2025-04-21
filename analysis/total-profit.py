@@ -1,10 +1,12 @@
-import pandas as pd
+# Opening cleaning.py and reading it with read() and executing if with exec()
+with open("cleaning/cleaning.py") as file:
+    exec(file.read())
 
-# Read CSV file
-df = pd.read_csv('online-retail.csv')
+df = df.drop(df[df['Quantity'] < 0].index) 
 
 # Summing of column
 ## Using exception in case column has mixed data types
+
 try:
     total = df['UnitPrice'].sum()
     print(total)
